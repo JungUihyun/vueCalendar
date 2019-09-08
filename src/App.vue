@@ -5,9 +5,9 @@
       <h2>Gondr Calendar</h2>
     </div>
     <div class="button-row">
-      <button @click="prev">이전</button>
+      <button @click="prev"><</button>
       <div class="month-label">{{current.getMonth() + 1}} 월</div>
-      <button @click="next">다음</button>
+      <button @click="next">></button>
     </div>
     <div class="calendar">
       <div v-for="week in dayList" class="week">
@@ -26,8 +26,10 @@
         <div class="form-group">
           <input v-model="todoTitle" type="text" placeholder="할 일을 입력하세요" />
           <textarea v-model="todoContent" placeholder="상세한 내용을 입력하세요"></textarea>
-          <button type="button" @click="saveTodo">입력</button>
-          <button type="button" @click="popupOpen = false">닫기</button>
+          <div class="btn-group">
+            <button type="button" @click="saveTodo">입력</button>
+            <button type="button" @click="popupOpen = false">닫기</button>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +42,7 @@ export default {
   created() {
     let now = new Date();
     this.drawCalendar(now);
+    
   },
   methods: {
     drawCalendar(now) {
@@ -138,6 +141,15 @@ export default {
   justify-content: space-between;
 }
 
+.button-row button {
+  border: none;
+  background-color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(80, 80, 80);
+}
+
 .month-label {
   font-size: 25px;
 }
@@ -170,22 +182,76 @@ export default {
   width: 400px;
   height: 300px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
+  border: 3px solid #41B883;
 }
 
 #popup > .inner > .form-group {
   display: grid;
   grid-template-columns: 1fr;
   width: 80%;
-  height: 80%;
+  height: 100%;
   grid-gap: 10px;
+}
+
+#popup > .inner > .form-group input {
+  height: 25px;
+  padding: 1px 9px;
+  border-radius: 4px;
+  border: 2px solid #aaa;
+    font-size: 15px;
+}
+
+#popup > .inner > .form-group textarea {
+  border-radius: 4px;
+  border: 2px solid #aaa;
+  padding: 9px;
+  font-size: 15px;
 }
 
 .form-group > textarea {
   height: 150px;
 }
+
+#popup > .inner > .form-group .btn-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 35px;
+}
+
+#popup > .inner > .form-group .btn-group button {
+  width: 70px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+#popup > .inner > .form-group .btn-group button:first-child {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+#popup > .inner > .form-group .btn-group button:last-child {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #000
+}
+
+#popup > .inner > .form-group .btn-group button:first-child:hover {
+  background-color: #0069D9;
+  border-color: #0069D9;
+}
+
+#popup > .inner > .form-group .btn-group button:last-child:hover {
+  background-color: #E0A800;
+  border-color: #E0A800;
+}
+
+
+
 </style>

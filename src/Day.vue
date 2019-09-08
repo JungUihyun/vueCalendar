@@ -38,6 +38,11 @@
         justify-content: flex-start;
         flex-direction: column;
         box-shadow: 2px 2px 1px 1px #ddd;
+        border-radius: 5px;
+    }
+
+    .day:hover {
+        border: 1.5px solid #41B883;
     }
 
     .date {
@@ -60,6 +65,7 @@
         border-radius: 0.25rem;
         padding:0.2rem 0.25rem;
         margin:4px;
+        cursor: pointer;
     }
 
 </style>
