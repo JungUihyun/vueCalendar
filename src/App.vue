@@ -9,30 +9,33 @@
       <div class="month-label">{{current.getMonth() + 1}} 월</div>
       <button @click="next">></button>
     </div>
-    <div class="calendar">
-      <div v-for="week in dayList" class="week">
-        <day
-          v-for="day in week"
-          :day="day"
-          :key="day.idx"
-          @edit="openEditPopup"
-          @open="openPopupWindow(day.idx)"
-        >{{day}}</day>
+    <transition name="slide">
+      <div class="calendar">
+        <div v-for="week in dayList" class="week">
+          <day
+            v-for="day in week"
+            :day="day"
+            :key="day.idx"
+            @edit="openEditPopup"
+            @open="openPopupWindow(day.idx)"
+          >{{day}}</day>
+        </div>
       </div>
-    </div>
-
-    <div id="popup" v-if="popupOpen">
-      <div class="inner">
-        <div class="form-group">
-          <input v-model="todoTitle" type="text" placeholder="할 일을 입력하세요" />
-          <textarea v-model="todoContent" placeholder="상세한 내용을 입력하세요"></textarea>
-          <div class="btn-group">
-            <button type="button" @click="saveTodo">입력</button>
-            <button type="button" @click="popupOpen = false">닫기</button>
+    </transition>      
+    <transition name="fade">
+      <div id="popup" v-if="popupOpen">
+        <div class="inner">
+          <div class="form-group">
+            <input v-model="todoTitle" type="text" placeholder="할 일을 입력하세요" />
+            <textarea v-model="todoContent" placeholder="상세한 내용을 입력하세요"></textarea>
+            <div class="btn-group">
+              <button type="button" @click="saveTodo">입력</button>
+              <button type="button" @click="popupOpen = false">닫기</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -127,6 +130,24 @@ export default {
 </script>
 
 <style>
+.slide-leave-active,
+.slide-enter-active {
+  transition: 1s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 .logo {
   width: 100%;
   display: flex;
