@@ -33,7 +33,7 @@
 <style scoped>
     .day {
         width:100%;
-        height:100%;
+        height:120px;
         display: flex;
         justify-content: flex-start;
         flex-direction: column;
@@ -43,6 +43,10 @@
 
     .day:hover {
         border: 1.5px solid #41B883;
+    }
+
+    .list {
+        overflow-y: auto;
     }
 
     .date {
